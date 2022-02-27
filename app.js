@@ -2,30 +2,51 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const util = require("util");
 
-const asyncFile = 
+const Manager = require("./lib/Manager");
+const Intern = require("./lib/Intern");
+const Engineer = require("./lib/Engineer");
+const { func } = require("prop-types");
 
-async function prompt(){
-    try{
-        const inquirerRes = await inquirer.prompt([
-            {
-                type: "input",
-                name: "managerName",
-                message: "What is your manager's name?: "
-           },
-           {
-                type: "input",
-                name: "id",
-                message: "Enter your ID: "
-           },
-           {
-                type: "input",
-                name: "managerEmail",
-                message: "Enter your email address: "
-           }
-        ]);
-        console.log(inquirerRes.email)
-    }
-    catch(err){
-        
-    }
-};
+const asyncFile = util.promisify(fs.writeFile);
+
+const employeeCards = [];
+let employeeCardsStr;
+
+function newEmployee(){
+    inquirer.prompt([
+        {
+            type: "list",
+            message: "What's your role?",
+            name: "role",
+            choices: ["Manager","Engineer","Intern"]
+          },
+          {
+            type: "input",
+            message: "What is your Name?",
+            name: "name"
+          },
+          {
+            type: "input",
+            message: "What is your Id?",
+            name: "id"
+          },
+          {
+            type: "input",
+            message: "What is your Email?",
+            name: "email"
+          }
+    ])
+
+    .then(function(primaryAnswer){
+        if(primaryAnswer.role === "Manager"){
+            managerInfo(primaryAnswer)
+        }else if(primaryAnswer.role ==="Engineer"){
+            engineerInfo(primaryAnswer)
+        }else if(primaryAnswer.role === "intern"){
+            internInfo(primaryAnswer)
+        }
+    })
+    .catch(function(err){
+        console.log(err);
+    })
+}
