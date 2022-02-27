@@ -7,7 +7,7 @@ const Intern = require("./lib/Intern");
 const Engineer = require("./lib/Engineer");
 const { func } = require("prop-types");
 
-const asyncFile = util.promisify(fs.writeFile);
+const asyncFiles = util.promisify(fs.writeFile);
 
 const employeeCards = [];
 let employeeCardsStr;
@@ -50,3 +50,70 @@ function newEmployee(){
         console.log(err);
     })
 }
+
+function managerInfo(responses){
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "What is your office number",
+            name: "officeNumber"
+        }
+    ])
+    .then(function(office){
+        const manager = new Manager (responses.name, responses.id, responses.email, office.officeNumber)
+        employeeCards.push(manager.appendhtml());
+        nextEmployee();
+    })
+}
+
+function engineerInfo(responses){
+    inquirer.prompt([
+        {
+          type: "input",
+          message: "What is your github username?",
+          name: "gitName"
+        }
+      ]).then(function(gitName){
+        
+        const engineer = new Engineer (responses.name, responses.id, responses.email, gitName.gitName)
+        employeeCards.push(engineer.appendHtml()); 
+        nextEmployee();
+    })
+  }
+
+  function internData(responses){
+    inquirer.prompt([
+        {
+          type: "input",
+          message: "What school does the intern attend?",
+          name: "school"
+        }
+      ]).then(function(school){
+        // Create new inter from class
+        const intern = new Intern (responses.name, responses.id, responses.email, school.school)
+        employeeCards.push(intern.appendHtml());
+        nextEmployee();
+      })
+  }
+
+  function nextEmployee(){
+    inquirer.prompt([
+      {
+        type: "list",
+          message: "Would you like to add another employee?",
+          name: "addNext",
+          choices: [
+            "yes",
+            "no",
+          ]
+      }
+    ]).then(function(response){
+  if (response.addNext === "yes") {
+    newEmployee();
+  } else {
+    employeeCardsStr = employeeCards.join("");
+    generateHTML();
+  };
+    });
+  };
+
