@@ -1,4 +1,5 @@
-const Employee = require("../lib/Employee");
+
+const Employee = require("../lib/Employee")
 
 test("Can instantiate Employee instance", () => {
   const e = new Employee();
@@ -18,7 +19,7 @@ test("Can set id via constructor argument", () => {
 });
 
 test("Can set email via constructor argument", () => {
-    
+
   const testValue = "test@test.com";
   const e = new Employee("Jamal", 1, testValue);
   expect(e.email).toBe(testValue);

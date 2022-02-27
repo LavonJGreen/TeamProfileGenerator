@@ -5,7 +5,6 @@ const util = require("util");
 const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
 const Engineer = require("./lib/Engineer");
-const { func } = require("prop-types");
 
 const asyncFiles = util.promisify(fs.writeFile);
 
@@ -61,7 +60,7 @@ function managerInfo(responses){
     ])
     .then(function(office){
         const manager = new Manager (responses.name, responses.id, responses.email, office.officeNumber)
-        employeeCards.push(manager.appendhtml());
+        employeeCards.push(manager.appendHtml());
         nextEmployee();
     })
 }
@@ -81,7 +80,7 @@ function engineerInfo(responses){
     })
   }
 
-  function internData(responses){
+  function internInfo(responses){
     inquirer.prompt([
         {
           type: "input",
@@ -117,3 +116,4 @@ function engineerInfo(responses){
     });
   };
 
+  function generateHTML() {}
