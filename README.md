@@ -12,7 +12,7 @@ Create an app the allows for quick information look up for managers to contact t
 
 
 ## Screenshot
-![Alt text]()
+![Alt text](/teamProfileExample.png)
 
 ## Contribution
 Made by Lavon J Green

@@ -41,7 +41,7 @@ function newEmployee(){
             managerInfo(primaryAnswer)
         }else if(primaryAnswer.role ==="Engineer"){
             engineerInfo(primaryAnswer)
-        }else if(primaryAnswer.role === "intern"){
+        }else if(primaryAnswer.role === "Intern"){
             internInfo(primaryAnswer)
         }
     })
@@ -85,11 +85,11 @@ function engineerInfo(responses){
         {
           type: "input",
           message: "What school does the intern attend?",
-          name: "school"
+          name: "university"
         }
-      ]).then(function(school){
-        // Create new inter from class
-        const intern = new Intern (responses.name, responses.id, responses.email, school.school)
+      ]).then(function(univeristy){
+       
+        const intern = new Intern (responses.name, responses.id, responses.email, univeristy.univeristy)
         employeeCards.push(intern.appendHtml());
         nextEmployee();
       })
@@ -116,4 +116,34 @@ function engineerInfo(responses){
     });
   };
 
-  function generateHTML() {}
+  function generateHTML() {
+    const html =
+    `<!doctype html>
+<html lang= "en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<title>Developer Profile</title>
+</head>
+<body>
+<div class="container">
+  <div class="jubotron" style="background-color: black; height: 100vh;">
+  <center><h1 class="display-4" style="margin: 50px">My Team Roster</h1></center>
+    <div class="row d-flex justify-content-around">
+    ${employeeCardsStr}
+    </div>
+  </div>
+</div>
+<script
+  src="https://code.jquery.com/jquery-3.6.0.slim.js"
+  integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY="
+  crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</body>
+</html>`
+asyncFiles('index.html', html, 'UTF-8');
+};
+
+
+newEmployee();
