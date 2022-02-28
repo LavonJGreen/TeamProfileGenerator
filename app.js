@@ -124,12 +124,12 @@ function engineerInfo(responses){
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<title>Developer Profile</title>
+<title>Team Member Profile Cards</title>
 </head>
 <body>
 <div class="container">
   <div class="jubotron" style="background-color: black; height: 100vh;">
-  <center><h1 class="display-4" style="margin: 50px">My Team Roster</h1></center>
+  <center><h1 class="display-4" style="margin: 50px">Team Member Info</h1></center>
     <div class="row d-flex justify-content-around">
     ${employeeCardsStr}
     </div>
